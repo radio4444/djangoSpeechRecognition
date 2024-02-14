@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="user_input">Input anything:</label><br>
+        <input type="text" id="user_input" name="user_input"><br>
+        <button type="submit">Submit</button>
+        <h1>Your input:</h1>
+        <p>{{ user_input }}</p>
+        <a href="{% url 'input_form' %}">Go back to input form</a>
+    </form>
+</body>
+</html>
