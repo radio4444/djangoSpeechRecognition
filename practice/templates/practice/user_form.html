@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Info</title>
+</head>
+<body>
+    <h1>User Info</h1>
+
+    <h2>Enter Your Info</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>User Info List</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.name }} - {{ user.email }} - {{ user.address }} - {{ user.phone_number }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
