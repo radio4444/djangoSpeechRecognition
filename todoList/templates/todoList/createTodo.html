@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Todo List</title>
 </head>
 <body>
-
+    <h1>Todo List</h1>
+    <ul>
+        {% for todo_item in todo_items %}
+        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} <a href="{% url 'complete_todo_item' todo_item.id %}">Complete</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_todo_item' %}">Add Todo Item</a>
 </body>
 </html>
