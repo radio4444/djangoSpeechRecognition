@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <h2>Incomplete</h2>
+    <ul>
+        {% for todo_item in incomplete_items %}
+        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
+            {% if not todo_item.completed %}
+                <a href="{% url 'complete_todo_item' todo_item.id %}">Complete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Completed</h2>
+    <ul>
+        {% for todo_item in completed_items %}
+        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
+            <span style="color: green;">Completed</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_todo_item' %}">Add Todo Item</a>
+</body>
+</html>
