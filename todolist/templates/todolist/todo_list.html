@@ -12,6 +12,9 @@
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
             {% if not todo_item.completed %}
                 <a href="{% url 'complete_todo_item' todo_item.id %}">Complete</a>
+                <a href="{% url 'delete_todo_item' todo_item.id %}">
+                    <span style ="color:red;">Delete</span>
+                </a>
             {% endif %}
         </li>
         {% endfor %}
@@ -21,6 +24,10 @@
         {% for todo_item in completed_items %}
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
             <span style="color: green;">Completed</span>
+            <a href="{% url 'delete_todo_item' todo_item.id %}">
+                <span style ="color:red;">Delete</span>
+            </a>
+
         </li>
         {% endfor %}
     </ul>
