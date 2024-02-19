@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import TodoItem
 from .forms import TodoItemForm
 
@@ -26,17 +26,15 @@ def delete_todo_item(request, todo_id):
 
 
 def update_todo_item(request, todo_id):
-	record = TodoItem.objects.get(id=todo_id)
+	todo_item = get_object_or_404(TodoItem, id=todo_id)
 	if request.method == 'POST':
-		form = TodoItemForm(request.POST, instance=record)
+		form = TodoItemForm(request.POST, instance=todo_item)
 		if form.is_valid():
 			form.save()
 			return redirect('todo_list')
-		else:
-			form = TodoItemForm(instance=record)
-		return render(request, 'todolist/update_todo_item.html', {'form':form})
-
-	pass
+	else:
+		form = TodoItemForm(instance=todo_item)
+	return render(request, 'todolist/update_todo_item.html', {'form': form})
 
 
 def add_todo_item(request):
