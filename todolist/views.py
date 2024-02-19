@@ -20,9 +20,8 @@ def complete_todo_item(request, todo_id):
 
 
 def delete_todo_item(request, todo_id):
-	if request.method == 'DELETE':
-		TodoItem.objects.filter(id=todo_id).delete()
-		return redirect('todo_list')
+	TodoItem.objects.filter(id=todo_id).delete()
+	return redirect('todo_list')
 
 
 def update_todo_item(request, todo_id):
