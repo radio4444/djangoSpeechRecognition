@@ -25,10 +25,12 @@
         {% for todo_item in completed_items %}
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
             <span style="color: green;">Completed</span>
+            <a href="{% url 'update_todo_item' todo_item.id %}">
+                <span style ="color:blue;">Update</span>
+            </a>
             <a href="{% url 'delete_todo_item' todo_item.id %}">
                 <span style ="color:red;">Delete</span>
             </a>
-
         </li>
         {% endfor %}
     </ul>
