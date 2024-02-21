@@ -7,6 +7,7 @@
 <body>
     <h1>Todo List</h1>
     <h2>Incomplete</h2>
+    <a href="#">Sort</a>
     <ul>
         {% for todo_item in incomplete_items %}
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 

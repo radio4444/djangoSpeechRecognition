@@ -45,3 +45,7 @@ def add_todo_item(request):
 	else:
 		form = TodoItemForm()
 	return render(request, 'todolist/add_todo_item.html', {'form': form})
+
+
+def sort_todo_item(request):
+	pass

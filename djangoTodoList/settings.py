@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'djangoSpeechRecognition.urls'
+ROOT_URLCONF = 'djangoTodoList.urls'
 
 TEMPLATES = [
     {
@@ -70,18 +70,30 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djangoSpeechRecognition.wsgi.application'
+WSGI_APPLICATION = 'djangoTodoList.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todoList',
+        'USER': 'postgres',
+        'PASSWORD': '$PostgresSQLRadio4444$',
+        'HOST': 'localhost',  # Or your PostgreSQL server's address
+        'PORT': '5432',       # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
