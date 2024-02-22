@@ -47,5 +47,25 @@ def add_todo_item(request):
 	return render(request, 'todolist/add_todo_item.html', {'form': form})
 
 
-def sort_todo_item(request):
-	pass
+def sort_todo_item(request):  # chatgpt
+	if request.method == 'POST':
+		sort_property = request.POST.get('sort_property')
+		sort_order = request.POST.get('sort_order')
+
+		# Fetch incomplete and complete todo items separately
+		incomplete_items = TodoItem.objects.filter(completed=False)
+		completed_items = TodoItem.objects.filter(completed=True)
+
+		# Sort incomplete and complete todo items based on the selected property and order
+		if sort_order == 'asc':
+			incomplete_items = incomplete_items.order_by(sort_property)
+			completed_items = completed_items.order_by(sort_property)
+		else:
+			incomplete_items = incomplete_items.order_by(f'-{sort_property}')
+			completed_items = completed_items.order_by(f'-{sort_property}')
+
+		return render(request, 'todolist/todo_list.html',
+		              {'incomplete_items': incomplete_items, 'completed_items': completed_items})
+	else:
+		# Handle GET request if needed
+		pass

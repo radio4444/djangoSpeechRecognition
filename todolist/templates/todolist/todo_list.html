@@ -7,7 +7,21 @@
 <body>
     <h1>Todo List</h1>
     <h2>Incomplete</h2>
-    <a href="#">Sort</a>
+    <form method="post" action="{% url 'sort_todo_item' %}">
+        {% csrf_token %}
+        <label for="sort_property">Sort By:</label>
+        <select name="sort_property" id="sort_property">
+            <option value="task_name">Task Name</option>
+            <option value="priority">Priority</option>
+            <option value="due_date">Due Date</option>
+        </select>
+        <label for="sort_order">Order:</label>
+        <select name="sort_order" id="sort_order">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
     <ul>
         {% for todo_item in incomplete_items %}
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} 
