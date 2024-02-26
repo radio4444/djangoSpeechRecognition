@@ -11,6 +11,7 @@ class TodoItem(models.Model):
 	priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
 	due_date = models.DateField()
 	completed = models.BooleanField(default=False)
+	description = models.TextField(max_length=300, null=True, blank=True)
 
 	def __str__(self):
 		return self.task_name
