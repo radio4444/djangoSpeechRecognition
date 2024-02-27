@@ -5,50 +5,70 @@
     <title>Todo List</title>
 </head>
 <body>
-    <h1>Todo List</h1>
-    <h2>Incomplete</h2>
-    <form method="post" action="{% url 'sort_todo_item' %}">
-        {% csrf_token %}
-        <label for="sort_property">Sort By:</label>
-        <select name="sort_property" id="sort_property">
-            <option value="task_name">Task Name</option>
-            <option value="priority">Priority</option>
-            <option value="due_date">Due Date</option>
-        </select>
-        <label for="sort_order">Order:</label>
-        <select name="sort_order" id="sort_order">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <button type="submit">Sort</button>
-    </form>
-    <ul>
-        {% for todo_item in incomplete_items %}
-        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} - {{ todo_item.description }}
+<h1>Todo List</h1>
+
+<form method="post" action="{% url 'sort_todo_item' %}">
+    {% csrf_token %}
+    <label for="sort_property">Sort By:</label>
+    <select name="sort_property" id="sort_property">
+        <option value="task_name">Task Name</option>
+        <option value="priority">Priority</option>
+        <option value="due_date">Due Date</option>
+    </select>
+    <label for="sort_order">Order:</label>
+    <select name="sort_order" id="sort_order">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<form method="post" action="{% url 'filter_todo_item' %}">
+    {% csrf_token %}
+    <label for="filter_property">Filter By:</label>
+    <select name="filter_property" id="filter_property">
+        <option value="task_name">Task Name</option>
+        <option value="priority">Priority</option>
+        <option value="due_date">Due Date</option>
+    </select>
+    <label for="filter_contains">Contains:</label>
+    <input type="text" name="filter_contains" id="filter_contains">
+    <button type="submit">Filter</button>
+</form>
+<form method="get" action="{% url 'search_todo_item' %}">
+    <label for="search">Search: </label>
+    <input type="search" id="search" name="search">
+    <button type="submit">Search</button>
+</form>
+<h2>Incomplete</h2>
+<ul>
+    {% for todo_item in incomplete_items %}
+        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }}
+            - {{ todo_item.description }}
             {% if not todo_item.completed %}
                 <a href="{% url 'complete_todo_item' todo_item.id %}">Complete</a>
                 <a href="{% url 'delete_todo_item' todo_item.id %}">
-                    <span style ="color:red;">Delete</span>
+                    <span style="color:red;">Delete</span>
                 </a>
             {% endif %}
-                <a href="{% url 'update_todo_item' todo_item.id %}">Update</a>
+            <a href="{% url 'update_todo_item' todo_item.id %}">Update</a>
         </li>
-        {% endfor %}
-    </ul>
-    <h2>Completed</h2>
-    <ul>
-        {% for todo_item in completed_items %}
-        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }} - {{ todo_item.description }}
+    {% endfor %}
+</ul>
+<h2>Completed</h2>
+<ul>
+    {% for todo_item in completed_items %}
+        <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }}
+            - {{ todo_item.description }}
             <span style="color: green;">Completed</span>
             <a href="{% url 'update_todo_item' todo_item.id %}">
-                <span style ="color:blue;">Update</span>
+                <span style="color:blue;">Update</span>
             </a>
             <a href="{% url 'delete_todo_item' todo_item.id %}">
-                <span style ="color:red;">Delete</span>
+                <span style="color:red;">Delete</span>
             </a>
         </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_todo_item' %}">Add Todo Item</a>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_todo_item' %}">Add Todo Item</a>
 </body>
 </html>

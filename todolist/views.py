@@ -71,3 +71,27 @@ def sort_todo_item(request):  # chatgpt
 		pass
 
 
+def search_todo_item(request):
+	pass
+
+
+def filter_todo_item(request):
+	if request.method == 'POST':
+		filter_property = request.POST.get('filter_property')
+		filter_contains = request.POST.get('filter_contains')
+
+		incomplete_items = TodoItem.objects.filter(completed=False)
+		completed_items = TodoItem.objects.filter(completed=True)
+
+		if filter_contains:
+			# Filter incomplete items based on the filter property and contains criteria
+			incomplete_items = incomplete_items.filter(**{f'{filter_property}__icontains': filter_contains})
+			# Filter completed items based on the filter property and contains criteria
+			completed_items = completed_items.filter(**{f'{filter_property}__icontains': filter_contains})
+
+		return render(request, 'todolist/todo_list.html',
+		              {'incomplete_items': incomplete_items, 'completed_items': completed_items})
+	else:
+		# Handle GET request if needed
+		pass
+

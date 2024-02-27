@@ -8,4 +8,6 @@ urlpatterns = [
 	path('add/', views.add_todo_item, name='add_todo_item'),
 	path('update/<int:todo_id>/', views.update_todo_item, name='update_todo_item'),
 	path('sort/', views.sort_todo_item, name='sort_todo_item'),
+	path('search/', views.search_todo_item, name='search_todo_item'),
+	path('filter/', views.filter_todo_item, name='filter_todo_item'),
 ]
