@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Todo List</h1>
-
+{# Sort Item #}
 <form method="post" action="{% url 'sort_todo_item' %}">
     {% csrf_token %}
     <label for="sort_property">Sort By:</label>
@@ -22,6 +22,7 @@
     </select>
     <button type="submit">Sort</button>
 </form>
+{# Filter item #}
 <form method="post" action="{% url 'filter_todo_item' %}">
     {% csrf_token %}
     <label for="filter_property">Filter By:</label>
@@ -31,16 +32,26 @@
         <option value="due_date">Due Date</option>
     </select>
     <label for="filter_contains">Contains:</label>
-    <input type="text" name="filter_contains" id="filter_contains">
+    <input type="text" name="filter_contains"
+           id="filter_contains"
+            placeholder="Type a value....">
     <button type="submit">Filter</button>
 </form>
-<form method="get" action="{% url 'search_todo_item' %}">
-    <label for="search">Search: </label>
-    <input type="search" id="search" name="search">
-    <button type="submit">Search</button>
+{# Search item#}
+<form method="post" action="{% url 'search_todo_item' %}">
+    {% csrf_token %}
+    <label for="search_property">Search:</label>
+    <input type="search" id="search_property"
+               name="search_property"
+                placeholder="Type to Search....">
+        <button type="submit">Search</button>
+
 </form>
+{# Incomplete todo_items #}
 <h2>Incomplete</h2>
+
 <ul>
+    <li>name-priority-due date-completion</li>
     {% for todo_item in incomplete_items %}
         <li>{{ todo_item.task_name }} - {{ todo_item.priority }} - {{ todo_item.due_date }}
             - {{ todo_item.description }}
@@ -54,6 +65,7 @@
         </li>
     {% endfor %}
 </ul>
+{# Complete todo_items#}
 <h2>Completed</h2>
 <ul>
     {% for todo_item in completed_items %}
